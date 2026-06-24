@@ -1,0 +1,59 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Local data and generated outputs
+data/
+calibration/
+reports/
+outputs/
+output/
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tif
+*.tiff
+*.mp4
+*.mov
+*.avi
+
+# Keep documentation images only when explicitly placed under docs/assets
+!docs/assets/**/*.jpg
+!docs/assets/**/*.jpeg
+!docs/assets/**/*.png
+
+# Notebooks and local notebook checkpoints
+.ipynb_checkpoints/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/

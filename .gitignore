@@ -24,7 +24,10 @@ ENV/
 *.pfx
 
 # Local data and generated outputs
-data/
+data/*
+!data/synthetic/
+!data/synthetic/.gitkeep
+!data/synthetic/*.png
 calibration/
 reports/
 outputs/
@@ -39,10 +42,16 @@ output/
 *.mov
 *.avi
 
-# Keep documentation images only when explicitly placed under docs/assets
+# Keep safe synthetic samples and documentation images only when explicitly allowed
+!data/synthetic/*.png
 !docs/assets/**/*.jpg
 !docs/assets/**/*.jpeg
 !docs/assets/**/*.png
+
+# Local real-image or upload folders
+uploads/
+user_images/
+data/real/
 
 # Notebooks and local notebook checkpoints
 .ipynb_checkpoints/

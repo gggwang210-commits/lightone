@@ -189,6 +189,13 @@ lightone/
     portfolio_summary.md
 ```
 
+
+## 기술 문서
+
+- [기술 구조 요약](docs/architecture.md): 현재 구현 범위, 데이터 흐름, 실행 방법, 품질 판단 기준, 미구현 범위, 안전·개인정보 경계를 정리한 문서
+- [안전 정책](docs/safety-policy.md): 비의료 참고 정보, 개인정보 보호, Human-in-the-loop 원칙 정리
+- [기술 로드맵](docs/roadmap.md): 규칙 기반 MVP에서 ML 및 자세 인식 실험으로 확장하는 단계별 계획
+
 ## 8. Installation
 
 Create and activate a virtual environment first.

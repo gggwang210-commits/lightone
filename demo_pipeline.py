@@ -37,6 +37,11 @@ ASSET_DIR = os.path.join(OUTPUT_DIR, "demo_assets")
 RESULT_JSON = os.path.join(OUTPUT_DIR, "demo_result.json")
 
 
+def to_relative(path: str) -> str:
+    """Return repository-relative paths for portable JSON reports."""
+    return os.path.relpath(path, OUTPUT_DIR).replace(os.sep, "/")
+
+
 def ensure_dirs() -> None:
     os.makedirs(ASSET_DIR, exist_ok=True)
 
@@ -146,8 +151,8 @@ def run_p2_lighting() -> Dict[str, object]:
     before_uniformity = calculate_uniformity(before, grid=(8, 8))
     after_uniformity = calculate_uniformity(after, grid=(8, 8))
     return {
-        "input_image": before_path,
-        "normalized_image": after_path,
+        "input_image": to_relative(before_path),
+        "normalized_image": to_relative(after_path),
         "normalization": normalization_metrics,
         "before": before_uniformity,
         "after": after_uniformity,
@@ -169,7 +174,7 @@ def run_p3_center_qc() -> Dict[str, object]:
     qc_report = run_qc_gate(image)
     scale_report = estimate_scale_from_marker(image, marker_real_length_cm=70.0)
     return {
-        "input_image": path,
+        "input_image": to_relative(path),
         "qc": qc_report,
         "scale_reference_demo": scale_report,
         "booth_spec_unverified_marker": NEEDS_VERIFICATION,
@@ -232,7 +237,7 @@ def main() -> int:
         "system": "LIGHT ONE measurement reliability demo",
         "positioning": "체형 참고 정보 서비스이며 의료 진단기기가 아닙니다.",
         "synthetic_assets": {
-            "checkerboard_preview": checkerboard_path,
+            "checkerboard_preview": to_relative(checkerboard_path),
             "note": "합성 데이터로 실행되며 모든 출력 수치는 실제 계산값입니다.",
         },
         "P1_camera_calibration": p1,
@@ -247,7 +252,7 @@ def main() -> int:
     print_p1(p1)
     print_p2(p2)
     print_p3(p3)
-    print(f"\n결과 JSON 저장: {RESULT_JSON}")
+    print(f"\n결과 JSON 저장: {to_relative(RESULT_JSON)}")
     return 0
 
 

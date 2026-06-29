@@ -189,6 +189,13 @@ lightone/
     portfolio_summary.md
 ```
 
+
+## 데모 상담 리포트 샘플
+
+- [Basic 샘플](docs/demo-report-sample-basic.md): 촬영 품질 조건이 PASS인 기본 상담 리포트 예시
+- [Review 샘플](docs/demo-report-sample-review.md): 촬영 품질은 통과했지만 트레이너 확인이 필요한 상담 리포트 예시
+- [Retake 샘플](docs/demo-report-sample-retake.md): 촬영 조건 미달로 재촬영을 권고하는 상담 리포트 예시
+
 ## 8. Installation
 
 Create and activate a virtual environment first.

@@ -2,7 +2,7 @@
   "system": "LIGHT ONE measurement reliability demo",
   "positioning": "체형 참고 정보 서비스이며 의료 진단기기가 아닙니다.",
   "synthetic_assets": {
-    "checkerboard_preview": "C:\\Users\\win\\Documents\\Codex\\2026-06-22\\light-one-canon-eos-r7-rf\\outputs\\demo_assets\\synthetic_checkerboard_preview.png",
+    "checkerboard_preview": "demo_assets/synthetic_checkerboard_preview.png",
     "note": "합성 데이터로 실행되며 모든 출력 수치는 실제 계산값입니다."
   },
   "P1_camera_calibration": {
@@ -13,7 +13,7 @@
       "max_px": 1.1302806342428084e-05,
       "image_count": 10,
       "status": "PASS",
-      "rms_px": 3.282142172081502e-05,
+      "rms_px": 3.282142172053405e-05,
       "image_size": [
         1920,
         1080
@@ -26,7 +26,7 @@
       "max_px": 1.1302806342428084e-05,
       "image_count": 10,
       "status": "PASS",
-      "rms_px": 3.3395944932458826e-05,
+      "rms_px": 3.3395944931360895e-05,
       "image_size": [
         1920,
         1080
@@ -39,7 +39,7 @@
       "max_px": 9.042245437740348e-06,
       "image_count": 10,
       "status": "PASS",
-      "rms_px": 3.185045706761473e-05,
+      "rms_px": 3.1850457066716684e-05,
       "image_size": [
         1920,
         1080
@@ -52,7 +52,7 @@
       "max_px": 1.0172526344831567e-05,
       "image_count": 10,
       "status": "PASS",
-      "rms_px": 3.247653753648292e-05,
+      "rms_px": 3.2476537533743766e-05,
       "image_size": [
         1920,
         1080
@@ -60,8 +60,8 @@
     }
   },
   "P2_lighting_normalization": {
-    "input_image": "C:\\Users\\win\\Documents\\Codex\\2026-06-22\\light-one-canon-eos-r7-rf\\outputs\\demo_assets\\lighting_before.png",
-    "normalized_image": "C:\\Users\\win\\Documents\\Codex\\2026-06-22\\light-one-canon-eos-r7-rf\\outputs\\demo_assets\\lighting_after.png",
+    "input_image": "demo_assets/lighting_before.png",
+    "normalized_image": "demo_assets/lighting_after.png",
     "normalization": {
       "target_mean_luminance": 128.0,
       "before_mean_luminance": 150.14792317708333,
@@ -115,7 +115,7 @@
     }
   },
   "P3_center_qc": {
-    "input_image": "C:\\Users\\win\\Documents\\Codex\\2026-06-22\\light-one-canon-eos-r7-rf\\outputs\\demo_assets\\center_qc_standard.png",
+    "input_image": "demo_assets/center_qc_standard.png",
     "qc": {
       "pass": true,
       "status": "PASS",

@@ -51,9 +51,9 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-8 text-sm text-white/60">
             <a href="#problem" className="hover:text-cyan-400 transition-colors">문제정의</a>
             <a href="#solution" className="hover:text-cyan-400 transition-colors">솔루션</a>
-            <a href="#pricing" className="hover:text-cyan-400 transition-colors">요금제</a>
             <a href="#team" className="hover:text-cyan-400 transition-colors">창업자</a>
             <a href="#roadmap" className="hover:text-cyan-400 transition-colors">로드맵</a>
+            <a href="#pricing" className="hover:text-cyan-400 transition-colors">요금제</a>
           </div>
 
           {/* Mobile Hamburger */}
@@ -79,9 +79,9 @@ export default function Home() {
               {[
                 { href: "#problem", label: "문제정의" },
                 { href: "#solution", label: "솔루션" },
-                { href: "#pricing", label: "요금제" },
                 { href: "#team", label: "창업자" },
-                { href: "#roadmap", label: "로드맵" }
+                { href: "#roadmap", label: "로드맵" },
+                { href: "#pricing", label: "요금제" }
               ].map((item) => (
                 <a 
                   key={item.href}
@@ -142,8 +142,8 @@ export default function Home() {
                 MVP 운영 흐름
                 <ChevronRight className="w-4 h-4" />
               </a>
-              <a href="#pricing" className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-lg transition-all duration-200 text-sm sm:text-base">
-                상담 리포트 보기
+              <a href="#team" className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-lg transition-all duration-200 text-sm sm:text-base">
+                창업자 스토리
               </a>
               <a href="#roadmap" className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-lg transition-all duration-200 text-sm sm:text-base">
                 사업화 로드맵
@@ -305,91 +305,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== PRICING SECTION ===== */}
-      <section id="pricing" className="py-16 sm:py-20 lg:py-24 bg-[#0d1220]">
+      {/* ===== FOUNDER STORY SECTION ===== */}
+      <section id="team" className="py-16 sm:py-20 lg:py-24 bg-[#0d1220]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
             className="text-center mb-10 sm:mb-16"
           >
-            <motion.span variants={fadeInUp} className="text-cyan-400 text-xs sm:text-sm font-semibold tracking-widest uppercase">Pricing</motion.span>
-            <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl md:text-4xl font-bold mt-3 sm:mt-4">B2B SaaS 구독 요금제</motion.h2>
-            <motion.p variants={fadeInUp} className="text-white/50 mt-3 sm:mt-4 text-sm sm:text-base">센터 규모와 필요 기능에 맞춘 3단계 요금 구조</motion.p>
+            <motion.span variants={fadeInUp} className="text-cyan-400 text-xs sm:text-sm font-semibold tracking-widest uppercase">Why This Business</motion.span>
+            <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl md:text-4xl font-bold mt-3 sm:mt-4">이 사업을 만든 이유</motion.h2>
+            <motion.p variants={fadeInUp} className="text-white/50 mt-3 sm:mt-4 max-w-2xl mx-auto text-sm sm:text-base">
+              18년간 PT 현장에서 매일 반복된 문제를 더 이상 무시할 수 없었습니다.
+            </motion.p>
           </motion.div>
 
+          {/* Storytelling Block */}
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true }}
             variants={stagger}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto"
+            className="max-w-4xl mx-auto mb-12 sm:mb-16"
           >
-            {[
-              { 
-                name: "Starter", price: "29,000", period: "월", 
-                desc: "1인 트레이너 / 소규모 PT샵",
-                features: ["회원 30명 관리", "세션 기록 입력", "QS 점수 자동 산출", "AUTO/REVIEW/BLOCK 라우팅", "기본 대시보드"],
-                highlight: false
-              },
-              { 
-                name: "Pro", price: "89,000", period: "월", 
-                desc: "트레이너 3~5명 / 중형 센터",
-                features: ["회원 150명 관리", "PDF 리포트 생성 (로고 삽입)", "트레이너 권한 분리", "변화 추세 대시보드", "회원 공유 링크", "우선 기술 지원"],
-                highlight: true
-              },
-              { 
-                name: "Enterprise", price: "199,000", period: "월", 
-                desc: "대형 센터 / 프랜차이즈",
-                features: ["회원 무제한", "멀티 지점 관리", "API 연동 (ERP/CRM)", "커스텀 리포트 템플릿", "전담 매니저 배정", "SLA 99.5% 보장"],
-                highlight: false
-              }
-            ].map((plan, i) => (
-              <motion.div 
-                key={i} 
-                variants={fadeInUp}
-                className={`relative p-6 sm:p-8 rounded-2xl border transition-all duration-300 ${
-                  plan.highlight 
-                    ? "bg-gradient-to-b from-cyan-500/10 to-transparent border-cyan-500/30 sm:scale-[1.02]" 
-                    : "bg-white/[0.02] border-white/5 hover:border-white/10"
-                }`}
-              >
-                {plan.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-cyan-500 text-[#0a0e1a] text-xs font-bold rounded-full">
-                    추천
-                  </div>
-                )}
-                <h3 className="text-lg sm:text-xl font-bold">{plan.name}</h3>
-                <p className="text-xs sm:text-sm text-white/40 mt-1">{plan.desc}</p>
-                <div className="mt-4 sm:mt-6 mb-4 sm:mb-6">
-                  <span className="text-3xl sm:text-4xl font-black text-cyan-400">₩{plan.price}</span>
-                  <span className="text-white/40 text-xs sm:text-sm ml-1">/ {plan.period}</span>
-                </div>
-                <ul className="space-y-2.5 sm:space-y-3">
-                  {plan.features.map((f, j) => (
-                    <li key={j} className="flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-white/60">
-                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 mt-0.5 shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ===== FOUNDER SECTION ===== */}
-      <section id="team" className="py-16 sm:py-20 lg:py-24 bg-[#0a0e1a]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-            variants={stagger}
-            className="text-center mb-10 sm:mb-16"
-          >
-            <motion.span variants={fadeInUp} className="text-cyan-400 text-xs sm:text-sm font-semibold tracking-widest uppercase">Founder</motion.span>
-            <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl md:text-4xl font-bold mt-3 sm:mt-4">창업자 전문성</motion.h2>
-            <motion.p variants={fadeInUp} className="text-white/50 mt-3 sm:mt-4 text-sm sm:text-base">현장 18년 + AI 기술 + 콘텐츠 기획 = 국내 유일의 융합 역량</motion.p>
+            <motion.div variants={fadeInUp} className="p-6 sm:p-10 rounded-2xl bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 border border-white/5">
+              <div className="space-y-5 sm:space-y-6 text-sm sm:text-base text-white/70 leading-relaxed">
+                <p>
+                  <span className="text-cyan-400 font-semibold">"회원님, 지난달보다 어깨가 많이 좋아졌어요."</span><br/>
+                  13년간 이 말을 수천 번 했습니다. 그런데 회원이 물었습니다.
+                  <span className="text-white/90 font-medium"> "그게 어느 정도요? 숫자로 보여주세요."</span>
+                </p>
+                <p>
+                  답할 수 없었습니다. 내 눈에는 보이는데, 설명할 근거가 없었습니다.
+                  그날 회원은 재등록을 하지 않았습니다.
+                </p>
+                <p>
+                  이후로도 같은 상황이 반복됐습니다. 트레이너의 전문성은 똑같은데,
+                  그걸 <span className="text-white/90 font-medium">"증명할 도구"가 없었습니다.</span>
+                </p>
+                <p>
+                  그래서 만들었습니다. 트레이너의 관찰을 숫자로 바꾸고,
+                  회원의 변화를 리포트로 보여주는 도구를.
+                  <span className="text-cyan-400 font-medium"> 그것이 LIGHT ONE입니다.</span>
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
 
+          {/* Career + Skills Grid */}
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true }}
             variants={stagger}
@@ -462,7 +423,7 @@ export default function Home() {
       </section>
 
       {/* ===== ROADMAP SECTION ===== */}
-      <section id="roadmap" className="py-16 sm:py-20 lg:py-24 bg-[#0d1220]">
+      <section id="roadmap" className="py-16 sm:py-20 lg:py-24 bg-[#0a0e1a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
@@ -620,8 +581,80 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== PRICING SECTION ===== */}
+      <section id="pricing" className="py-16 sm:py-20 lg:py-24 bg-[#0a0e1a]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
+            variants={stagger}
+            className="text-center mb-10 sm:mb-16"
+          >
+            <motion.span variants={fadeInUp} className="text-cyan-400 text-xs sm:text-sm font-semibold tracking-widest uppercase">Pricing</motion.span>
+            <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl md:text-4xl font-bold mt-3 sm:mt-4">B2B SaaS 구독 요금제</motion.h2>
+            <motion.p variants={fadeInUp} className="text-white/50 mt-3 sm:mt-4 text-sm sm:text-base">센터 규모와 필요 기능에 맞춤 3단계 요금 구조</motion.p>
+          </motion.div>
+
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true }}
+            variants={stagger}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto"
+          >
+            {[
+              { 
+                name: "Starter", price: "29,000", period: "월", 
+                desc: "1인 트레이너 / 소규모 PT샵",
+                features: ["회원 30명 관리", "세션 기록 입력", "QS 점수 자동 산출", "AUTO/REVIEW/BLOCK 라우팅", "기본 대시보드"],
+                highlight: false
+              },
+              { 
+                name: "Pro", price: "89,000", period: "월", 
+                desc: "트레이너 3~5명 / 중형 센터",
+                features: ["회원 150명 관리", "PDF 리포트 생성 (로고 삽입)", "트레이너 권한 분리", "변화 추세 대시보드", "회원 공유 링크", "우선 기술 지원"],
+                highlight: true
+              },
+              { 
+                name: "Enterprise", price: "199,000", period: "월", 
+                desc: "대형 센터 / 프랜차이즈",
+                features: ["회원 무제한", "멀티 지점 관리", "API 연동 (ERP/CRM)", "커스텀 리포트 템플릿", "전담 매니저 배정", "SLA 99.5% 보장"],
+                highlight: false
+              }
+            ].map((plan, i) => (
+              <motion.div 
+                key={i} 
+                variants={fadeInUp}
+                className={`relative p-6 sm:p-8 rounded-2xl border transition-all duration-300 ${
+                  plan.highlight 
+                    ? "bg-gradient-to-b from-cyan-500/10 to-transparent border-cyan-500/30 sm:scale-[1.02]" 
+                    : "bg-white/[0.02] border-white/5 hover:border-white/10"
+                }`}
+              >
+                {plan.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-cyan-500 text-[#0a0e1a] text-xs font-bold rounded-full">
+                    추천
+                  </div>
+                )}
+                <h3 className="text-lg sm:text-xl font-bold">{plan.name}</h3>
+                <p className="text-xs sm:text-sm text-white/40 mt-1">{plan.desc}</p>
+                <div className="mt-4 sm:mt-6 mb-4 sm:mb-6">
+                  <span className="text-3xl sm:text-4xl font-black text-cyan-400">₩{plan.price}</span>
+                  <span className="text-white/40 text-xs sm:text-sm ml-1">/ {plan.period}</span>
+                </div>
+                <ul className="space-y-2.5 sm:space-y-3">
+                  {plan.features.map((f, j) => (
+                    <li key={j} className="flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-white/60">
+                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 mt-0.5 shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* ===== CTA SECTION ===== */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#0a0e1a]">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#0d1220]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true }}

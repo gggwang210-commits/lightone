@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Activity, Shield, FileText, TrendingUp, Users, 
   ChevronRight, CheckCircle2, AlertTriangle, XCircle,
@@ -19,11 +19,24 @@ const stagger = {
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0a0e1a] text-white font-sans overflow-x-hidden">
       {/* ===== NAVIGATION ===== */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0e1a]/80 backdrop-blur-xl border-b border-white/5">
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
+        scrolled 
+          ? "bg-[#0a0e1a]/95 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20" 
+          : "bg-transparent backdrop-blur-none border-b border-transparent"
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3">
             <img 

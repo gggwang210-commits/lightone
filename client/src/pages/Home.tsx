@@ -427,7 +427,7 @@ export default function Home() {
                   핵심 자격 · 역량
                 </h3>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {["생활스포츠지도사 2급", "컴퓨터활용능력 1급", "Python/SQL/Java", "XGBoost/LightGBM", "FastAPI/Django", "OpenPose/MediaPipe"].map((skill, i) => (
+                  {["컴퓨터활용능력 1급", "Python/SQL/Java", "XGBoost/LightGBM", "FastAPI/Django", "OpenPose/MediaPipe"].map((skill, i) => (
                     <span key={i} className="px-2.5 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs bg-white/5 border border-white/10 rounded-lg text-white/60">{skill}</span>
                   ))}
                 </div>

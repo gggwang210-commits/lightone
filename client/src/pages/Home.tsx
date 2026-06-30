@@ -631,9 +631,6 @@ export default function Home() {
                 포트폴리오 보기
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
-              <a href="https://github.com/gggwang210-commits/LightOne_V2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-lg transition-all duration-200 text-sm sm:text-base">
-                GitHub 코드 보기
-              </a>
             </motion.div>
           </motion.div>
         </div>

@@ -303,6 +303,13 @@ export default function Home() {
                 <p className="text-xs sm:text-sm text-white/60">NRS ≥ 7 또는 RPE 10<br/>안전상 중단. 전문가 상담 권고 (의료 판단 아님).</p>
               </div>
             </div>
+            <div className="mt-6 sm:mt-8 text-center">
+              <a href="/report-demo" className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 font-medium rounded-lg transition-all duration-200 text-xs sm:text-sm">
+                <FileText className="w-4 h-4" />
+                실제 리포트 견본 보기
+                <ChevronRight className="w-4 h-4" />
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -627,9 +634,12 @@ export default function Home() {
               트레이너의 판단에 근거를 더합니다.
             </motion.p>
             <motion.div variants={fadeInUp} className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
-              <a href="https://areyourad.netlify.app" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-cyan-500 hover:bg-cyan-400 text-[#0a0e1a] font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base">
-                포트폴리오 보기
+              <a href="/report-demo" className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-cyan-500 hover:bg-cyan-400 text-[#0a0e1a] font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base">
+                리포트 데모 보기
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </a>
+              <a href="https://areyourad.netlify.app" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-lg transition-all duration-200 text-sm sm:text-base">
+                포트폴리오 보기
               </a>
             </motion.div>
           </motion.div>

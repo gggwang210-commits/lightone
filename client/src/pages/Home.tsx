@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { 
   Activity, Shield, FileText, TrendingUp, Users, 
   ChevronRight, CheckCircle2, AlertTriangle, XCircle,
-  BarChart3, Brain, Camera, Zap, Award, Target,
-  Building2, GraduationCap, Briefcase, Smartphone,
+  BarChart3, Brain, Camera, Zap, Target,
+  Building2,
   Menu, X
 } from "lucide-react";
 
@@ -134,7 +134,9 @@ export default function Home() {
             </motion.h2>
 
             <motion.p variants={fadeInUp} className="text-sm sm:text-base lg:text-lg text-white/60 leading-relaxed mb-8 sm:mb-10 max-w-xl">
-              LIGHT ONE은 PT샵의 운동 기록, 체형 관찰, 통증 반응, 상담 메모를 하나의 리포트 흐름으로 정리해 트레이너가 상담과 재등록 관리에 바로 활용할 수 있도록 돕는 B2B 웰니스 SaaS MVP입니다.
+              PT샵의 운동 기록, 체형 관찰, 통증 반응, 상담 메모를<br className="hidden sm:inline" />
+              하나의 리포트로 정리해 트레이너의 상담과<br className="hidden sm:inline" />
+              재등록 관리를 돕는 B2B 웰니스 SaaS MVP.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
@@ -212,7 +214,7 @@ export default function Home() {
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true }}
             variants={fadeInUp}
-            className="mt-10 sm:mt-16 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-purple-500/5 border border-white/5"
+            className="mt-6 sm:mt-10 p-5 sm:p-8 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-purple-500/5 border border-white/5"
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
               {[
@@ -350,74 +352,31 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Career + Skills Grid */}
+          {/* Key Credentials - Compact */}
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true }}
-            variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
+            variants={fadeInUp}
+            className="max-w-4xl mx-auto"
           >
-            {/* Career Timeline */}
-            <motion.div variants={fadeInUp} className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/5">
-              <h3 className="text-base sm:text-lg font-bold mb-5 sm:mb-6 flex items-center gap-2">
-                <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
-                경력 타임라인
-              </h3>
-              <div className="space-y-5 sm:space-y-6">
-                {[
-                  { period: "2007~2012", role: "편집부장 · 지방 신문사", desc: "콘텐츠 기획, 조직 운영, 정보 구조화 역량" },
-                  { period: "2012~2025", role: "PT 트레이너 · 센터 오너", desc: "회원 상담, 체형분석, 통증 관리, 마케팅 운영" },
-                  { period: "2025.03~현재", role: "바이오헬스케어 AI 전문가 과정", desc: "건양대병원 B2B · 미래교육융합원 · Python/ML/DL" }
-                ].map((item, i) => (
-                  <div key={i} className="flex gap-3 sm:gap-4">
-                    <div className="w-2 h-2 rounded-full bg-cyan-400 mt-2 sm:mt-2.5 shrink-0" />
-                    <div>
-                      <div className="text-[11px] sm:text-xs text-cyan-400/70 font-mono">{item.period}</div>
-                      <div className="font-semibold mt-0.5 text-sm sm:text-base">{item.role}</div>
-                      <div className="text-xs sm:text-sm text-white/40 mt-0.5">{item.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Skills & Credentials */}
-            <motion.div variants={fadeInUp} className="space-y-4 sm:space-y-6">
-              <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 flex items-center gap-2">
-                  <Award className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
-                  핵심 자격 · 역량
-                </h3>
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {["컴퓨터활용능력 1급", "Python/SQL/Java", "XGBoost/LightGBM", "FastAPI/Django", "OpenPose/MediaPipe"].map((skill, i) => (
-                    <span key={i} className="px-2.5 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs bg-white/5 border border-white/10 rounded-lg text-white/60">{skill}</span>
-                  ))}
+            <div className="p-5 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
+                <div>
+                  <div className="text-lg sm:text-xl font-bold text-cyan-400">18년+</div>
+                  <div className="text-xs sm:text-sm text-white/50 mt-1">PT 현장 경력</div>
+                  <div className="text-[11px] text-white/30 mt-0.5">편집부장 → 트레이너 → 센터 오너</div>
+                </div>
+                <div>
+                  <div className="text-lg sm:text-xl font-bold text-cyan-400">AI 전문가 과정</div>
+                  <div className="text-xs sm:text-sm text-white/50 mt-1">바이오헬스케어 AI</div>
+                  <div className="text-[11px] text-white/30 mt-0.5">건양대병원 B2B · 2025.03~</div>
+                </div>
+                <div>
+                  <div className="text-lg sm:text-xl font-bold text-cyan-400">Python/ML</div>
+                  <div className="text-xs sm:text-sm text-white/50 mt-1">기술 역량</div>
+                  <div className="text-[11px] text-white/30 mt-0.5">Django · XGBoost · MediaPipe</div>
                 </div>
               </div>
-
-              <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
-                  현재 교육 과정
-                </h3>
-                <p className="text-xs sm:text-sm text-white/60 leading-relaxed">
-                  대전 미래교육융합원 B2B 건양대학교병원<br/>
-                  <span className="text-cyan-400 font-medium">바이오헬스케어 AI 전문가 양성 과정</span><br/>
-                  2025.03.25 ~ 현재 진행 중
-                </p>
-              </div>
-
-              <div className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 flex items-center gap-2">
-                  <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
-                  SNS · 마케팅 역량
-                </h3>
-                <p className="text-xs sm:text-sm text-white/60 leading-relaxed">
-                  인스타그램, 틱톡, 네이버블로그, 스레드, 유튜브<br/>
-                  <span className="text-cyan-400 font-medium">구독자 1,000명+ · 조회수 80,000+</span><br/>
-                  <span className="text-white/40">(현재 교육 과정 참여로 잠시 중단)</span>
-                </p>
-              </div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>

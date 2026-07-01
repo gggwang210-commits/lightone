@@ -48,6 +48,165 @@ function QsRing({ score, size = 48, inner = 38 }: { score: number; size?: number
   );
 }
 
+// ─── JATC 레이더 차트 ──────────────────────────
+const jatcData = [
+  { label: "통증",    value: 62, color: "#EF4444", bgColor: "#FEE2E2" },
+  { label: "자세",    value: 72, color: "#2563EB", bgColor: "#DBEAFE" },
+  { label: "기능",    value: 68, color: "#0E9488", bgColor: "#CCFBF1" },
+  { label: "생활습관", value: 70, color: "#7C3AED", bgColor: "#EDE9FE" },
+];
+
+function JatcRadarChart() {
+  const cx = 90, cy = 90, r = 68;
+  const levels = [25, 50, 75, 100];
+  const n = jatcData.length;
+  // 각 축의 각도 (위쪽=통증, 오른쪽=자세, 아래=기능, 왼쪽=생활습관)
+  const angles = jatcData.map((_, i) => (Math.PI * 2 * i) / n - Math.PI / 2);
+
+  const toXY = (angle: number, pct: number) => ({
+    x: cx + r * pct * Math.cos(angle),
+    y: cy + r * pct * Math.sin(angle),
+  });
+
+  // 레이더 다각형 포인트
+  const dataPoints = jatcData.map((d, i) => toXY(angles[i], d.value / 100));
+  const dataPath = dataPoints.map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ") + " Z";
+
+  // 배경 레벨 다각형
+  const levelPath = (pct: number) =>
+    angles.map((a, i) => {
+      const p = toXY(a, pct);
+      return `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`;
+    }).join(" ") + " Z";
+
+  return (
+    <div className="rounded-xl p-4" style={{ background: "#F7F9FC", border: "1px solid #E3E7F0" }}>
+      {/* 헤더 */}
+      <div className="flex items-center justify-between mb-3">
+        <div className="text-sm font-extrabold" style={{ color: "#16284F" }}>JATC 영역별 불균형 분석</div>
+        <span className="text-[9px] font-bold px-2 py-0.5 rounded-full" style={{ background: "#EFF6FF", color: "#2563EB" }}>4개 영역</span>
+      </div>
+
+      <div className="flex items-center gap-4">
+        {/* SVG 레이더 차트 */}
+        <svg width="180" height="180" viewBox="0 0 180 180" className="flex-none">
+          {/* 배경 레벨 */}
+          {levels.map((lv) => (
+            <path
+              key={lv}
+              d={levelPath(lv / 100)}
+              fill="none"
+              stroke="#E3E7F0"
+              strokeWidth={lv === 100 ? 1.2 : 0.8}
+              strokeDasharray={lv === 100 ? "none" : "3,3"}
+            />
+          ))}
+
+          {/* 축 선 */}
+          {angles.map((a, i) => {
+            const end = toXY(a, 1);
+            return (
+              <line
+                key={i}
+                x1={cx} y1={cy}
+                x2={end.x.toFixed(1)} y2={end.y.toFixed(1)}
+                stroke="#CDD4E3" strokeWidth="0.8"
+              />
+            );
+          })}
+
+          {/* 레벨 수치 라벨 (25, 50, 75) */}
+          {[25, 50, 75].map((lv) => {
+            const p = toXY(angles[0], lv / 100);
+            return (
+              <text
+                key={lv}
+                x={(p.x + 3).toFixed(1)}
+                y={(p.y - 2).toFixed(1)}
+                fontSize="6"
+                fill="#8891A6"
+                fontWeight="600"
+                fontFamily="Inter, sans-serif"
+              >{lv}</text>
+            );
+          })}
+
+          {/* 데이터 영역 */}
+          <path d={dataPath} fill="rgba(37,99,235,0.12)" stroke="#2563EB" strokeWidth="1.8" strokeLinejoin="round" />
+
+          {/* 데이터 포인트 */}
+          {dataPoints.map((p, i) => (
+            <g key={i}>
+              <circle cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r="5" fill={jatcData[i].color} stroke="#fff" strokeWidth="1.5" />
+              <circle cx={p.x.toFixed(1)} cy={p.y.toFixed(1)} r="2" fill="#fff" />
+            </g>
+          ))}
+
+          {/* 축 라벨 */}
+          {jatcData.map((d, i) => {
+            const labelR = 1.22;
+            const p = toXY(angles[i], labelR);
+            const anchor = Math.abs(Math.cos(angles[i])) < 0.1 ? "middle" : Math.cos(angles[i]) > 0 ? "start" : "end";
+            return (
+              <text
+                key={i}
+                x={p.x.toFixed(1)}
+                y={(p.y + 1).toFixed(1)}
+                fontSize="9"
+                fontWeight="800"
+                fill={d.color}
+                textAnchor={anchor}
+                fontFamily="Noto Sans KR, sans-serif"
+                dominantBaseline="middle"
+              >{d.label}</text>
+            );
+          })}
+        </svg>
+
+        {/* 범례 + 수치 */}
+        <div className="flex-1 space-y-2">
+          {jatcData.map((d) => (
+            <div key={d.label}>
+              <div className="flex items-center justify-between mb-0.5">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full" style={{ background: d.color }} />
+                  <span style={{ fontSize: 10, fontWeight: 700, color: "#4D5670" }}>{d.label}</span>
+                </div>
+                <span style={{ fontSize: 11, fontWeight: 800, color: d.value < 65 ? d.color : "#16284F", fontFamily: "Inter" }}>
+                  {d.value}
+                  <small style={{ fontSize: 8, color: "#8891A6", fontWeight: 600 }}>/100</small>
+                </span>
+              </div>
+              {/* 바 */}
+              <div className="rounded-full overflow-hidden" style={{ height: 5, background: "#E3E7F0" }}>
+                <div
+                  className="h-full rounded-full"
+                  style={{
+                    width: `${d.value}%`,
+                    background: `linear-gradient(90deg, ${d.color}99, ${d.color})`,
+                    transition: "width 0.6s cubic-bezier(0.23,1,0.32,1)",
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+
+          {/* 불균형 경고 */}
+          <div className="rounded-lg px-2.5 py-2 mt-1" style={{ background: "#FEF3C7", border: "1px solid #FDE68A" }}>
+            <p style={{ fontSize: 9, fontWeight: 700, color: "#92400E" }}>
+              ⚠ 통증(62) 영역 취약 — 집중 관리 필요
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p className="text-[9px] font-medium mt-3 pt-2" style={{ color: "#8891A6", borderTop: "1px dashed #CDD4E3" }}>
+        ※ 4개 영역을 정규화하여 통합 상태를 추적 · 낮을수록 해당 영역 집중 관리 필요
+      </p>
+    </div>
+  );
+}
+
 // ─── QS 4주 추세 막대 차트 ─────────────────────
 const qsWeeklyData = [
   { week: "1주차", date: "05-02", qs: 71, routing: "AUTO" },
@@ -546,20 +705,8 @@ function MemberReport() {
               <p className="text-[10px] font-medium pt-2" style={{ color: "#8891A6", borderTop: "1px dashed #CDD4E3" }}>※ 세션 수행 품질을 0–100 스케일로 산출</p>
             </div>
 
-            {/* JATC */}
-            <div className="rounded-xl p-4" style={{ background: "#F7F9FC", border: "1px solid #E3E7F0" }}>
-              <div className="text-sm font-extrabold mb-3" style={{ color: "#16284F" }}>JATC (통합 상태 추적)</div>
-              <div className="grid grid-cols-4 gap-2 text-center mb-2">
-                {[{ico:Ico.heart,lab:"통증",val:"62"},{ico:Ico.body,lab:"자세",val:"72"},{ico:Ico.bolt,lab:"기능",val:"68"},{ico:Ico.target,lab:"생활습관",val:"70"}].map((item) => (
-                  <div key={item.lab}>
-                    <span className="w-7 h-7 mx-auto mb-1 flex items-center justify-center" style={{ color: "#0E9488" }}>{item.ico}</span>
-                    <div className="text-[10px] font-bold mb-0.5" style={{ color: "#8891A6" }}>{item.lab}</div>
-                    <div className="text-sm font-extrabold" style={{ color: "#16284F", fontFamily: "Inter" }}>{item.val}<small style={{ fontSize: 9, color: "#8891A6", fontWeight: 600 }}>/100</small></div>
-                  </div>
-                ))}
-              </div>
-              <p className="text-[10px] font-medium pt-2" style={{ color: "#8891A6", borderTop: "1px dashed #CDD4E3" }}>※ 4개 영역을 정규화하여 통합 상태를 추적</p>
-            </div>
+            {/* JATC 레이더 차트 */}
+            <JatcRadarChart />
 
             {/* QS 4주 추세 차트 */}
             <QsTrendChart />

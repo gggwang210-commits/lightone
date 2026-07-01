@@ -159,7 +159,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold mb-6 sm:mb-8"
                 style={{ background: "rgba(14,148,136,0.15)", border: "1px solid rgba(14,148,136,0.3)", color: "#5EEAD4" }}>
                 <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                LIGHT ONE MVP · PT 상담 리포트 SaaS
+                LIGHT ONE MVP · TRAINER REPORT SAAS
               </div>
             </FadeIn>
 
@@ -172,8 +172,7 @@ export default function Home() {
 
             <FadeIn delay={0.2}>
               <p className="text-sm sm:text-base lg:text-lg leading-relaxed mb-8 sm:mb-10" style={{ color: "rgba(255,255,255,0.65)", maxWidth: "520px" }}>
-                PT샵의 운동 기록, 체형 관찰, 통증 반응, 상담 메모를 하나의 리포트로 정리해
-                트레이너의 상담과 재등록 관리를 돕는 B2B 웰니스 SaaS.
+                회원의 컨디션을 하나의 리포트 흐름으로 정리해 상담과 재등록 관리에 바로 활용할 수 있도록 돕는 B2B 웰니스 SaaS MVP.
               </p>
             </FadeIn>
 
@@ -201,7 +200,7 @@ export default function Home() {
                   { v: "14,773+", l: "국내 피트니스 시설", s: "문화체육관광부 2024" },
                   { v: "30~40%", l: "연간 회원 이탈률", s: "업계 추정" },
                   { v: "3단계", l: "위험 라우팅 시스템", s: "AUTO/REVIEW/BLOCK" },
-                  { v: "B2B", l: "SaaS 구독 모델", s: "PT샵·헬스장·기업" },
+                  { v: "B2B", l: "컨디셔닝 OS", s: "SaaS + 인증교육 + 기업 B2B" },
                 ].map((s, i) => (
                   <div key={i}>
                     <div className="text-xl sm:text-2xl font-bold font-num" style={{ color: "#5EEAD4" }}>{s.v}</div>
@@ -280,32 +279,118 @@ export default function Home() {
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ color: "var(--lo-navy-900)" }}>LIGHT ONE 핵심 솔루션</h2>
             <p className="mt-3 sm:mt-4 max-w-2xl mx-auto text-sm sm:text-base" style={{ color: "var(--lo-ink-2)" }}>
-              촬영 → 분석 → 수치화 → 리포트의 4단계 흐름으로 PT 상담의 근거를 만듭니다.
+              측정 이후 '그래서 무엇을, 왜, 어떤 순서로'를 답합니다. 촬영 보정 → 움직임 질 점검 → 기능 회복 프로토콜 → 교육·인증·B2B로 연결되는 컨디셔닝 OS입니다.
             </p>
           </FadeIn>
 
-          {/* 4-Step Flow */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 sm:mb-12">
-            {[
-              { step: "01", icon: Camera, title: "촬영 · 기록", desc: "운동 수행, 자세 사진, 통증 반응, RPE를 세션 단위로 입력" },
-              { step: "02", icon: Brain, title: "AI 분석", desc: "규칙 기반 QS 산출 + XGBoost 예측 모델로 위험도 분류" },
-              { step: "03", icon: BarChart3, title: "수치화 · 라우팅", desc: "AUTO / REVIEW / BLOCK 3단계 자동 분류로 즉시 판단 지원" },
-              { step: "04", icon: FileText, title: "리포트 생성", desc: "트레이너 검토 후 회원에게 전달 가능한 비의료 상담 리포트" },
-            ].map((item, i) => (
-              <FadeIn key={i} delay={i * 0.08}>
-                <div className="lo-card p-5 sm:p-6 h-full relative hover:shadow-lo-2 transition-all duration-300 group">
-                  <div className="absolute top-3 right-3 text-4xl font-black font-num" style={{ color: "var(--lo-line-strong)", lineHeight: 1 }}>{item.step}</div>
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3 sm:mb-4"
-                    style={{ background: "var(--lo-teal-tint)" }}>
-                    <item.icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: "var(--lo-teal)" }} />
+          {/* 3 Phase Overview */}
+          <FadeIn className="mb-8 sm:mb-10">
+            <div className="lo-card p-5 sm:p-8">
+              <div className="text-center mb-6">
+                <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "var(--lo-teal)" }}>Light One System Flow</span>
+                <h3 className="text-base sm:text-lg font-bold mt-1" style={{ color: "var(--lo-navy-900)" }}>측정에서 끝나지 않고, 회복 방법론으로 연결되는 3단계 7스텝 구조</h3>
+                <p className="text-xs sm:text-sm mt-2" style={{ color: "var(--lo-ink-2)" }}>일관된 촬영 조건으로 신체 변화를 추적하고, 수치화된 점수를 트레이너의 기능 회복 프로토콜과 연결합니다. 모든 판단의 마지막 단계는 트레이너의 검토입니다.</p>
+              </div>
+              {/* Phase 3-column */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                {[
+                  {
+                    phase: "PHASE 01", label: "Data Capture", title: "표준화 촬영",
+                    color: "var(--lo-blue)", bg: "rgba(59,130,246,0.06)", border: "rgba(59,130,246,0.2)",
+                    icon: Camera,
+                    steps: [
+                      { n: "01", t: "촬영 조건 표준화", d: "같은 시간대·공간·조명, 스마트폰 기반 전용 장비 불필요" },
+                      { n: "02", t: "기준선 · 자세 정렬", d: "바닥 기준선 고정, 촬영 간 위치 편차 최소화" },
+                      { n: "03", t: "4방향 촬영", d: "정면·측면 어깨·골반·척추·무릎 다각도 기록" },
+                    ]
+                  },
+                  {
+                    phase: "PHASE 02", label: "Quantitative Analysis", title: "정량 분석",
+                    color: "var(--lo-teal)", bg: "rgba(14,148,136,0.06)", border: "rgba(14,148,136,0.2)",
+                    icon: BarChart3,
+                    steps: [
+                      { n: "04", t: "분석 항목 추출", d: "어깨·골반 기울기, 척추 정렬도, 무릎·발목 정렬" },
+                      { n: "05", t: "수치화 · 구간화", d: "항목별 변화량 수치화, 가중치 적용 QS 100점 환산" },
+                      { n: "06", t: "변화 추적", d: "주차별 점수·항목 그래프, 재등록 상담 근거 자료" },
+                    ]
+                  },
+                  {
+                    phase: "PHASE 03", label: "Methodology IP", title: "방법론 매칭",
+                    color: "var(--lo-gold)", bg: "rgba(200,147,42,0.06)", border: "rgba(200,147,42,0.25)",
+                    icon: Brain,
+                    steps: [
+                      { n: "07★", t: "기능 회복 프로토콜 매칭", d: "약화 근육군 우선순위 → 회복 시퀀스 자동 제안 → 트레이너 최종 검토 후 회원 전달" },
+                    ],
+                    highlight: true
+                  },
+                ].map((ph, pi) => (
+                  <div key={pi} className="rounded-xl p-4 sm:p-5 flex flex-col gap-3"
+                    style={{ background: ph.bg, border: `1px solid ${ph.border}` }}>
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: ph.color + "22" }}>
+                        <ph.icon className="w-4 h-4" style={{ color: ph.color }} />
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-bold tracking-widest uppercase" style={{ color: ph.color }}>{ph.phase} · {ph.label}</div>
+                        <div className="text-sm font-bold" style={{ color: "var(--lo-navy-900)" }}>{ph.title}</div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      {ph.steps.map((s, si) => (
+                        <div key={si} className="flex gap-2.5 items-start">
+                          <span className="text-[10px] font-black font-num mt-0.5 shrink-0 w-6 text-center rounded" style={{ color: ph.color, background: ph.color + "18" }}>{s.n}</span>
+                          <div>
+                            <div className="text-xs font-semibold" style={{ color: "var(--lo-navy-900)" }}>{s.t}</div>
+                            <div className="text-[11px] leading-relaxed" style={{ color: "var(--lo-ink-2)" }}>{s.d}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {ph.highlight && (
+                      <div className="mt-1 rounded-lg px-3 py-2 text-[11px] font-semibold text-center" style={{ background: "rgba(200,147,42,0.12)", color: "var(--lo-gold)" }}>
+                        ★ 경쟁 솔루션이 멈추는 지점에서 시작하는 Body Logic IP
+                      </div>
+                    )}
                   </div>
-                  <h3 className="text-sm sm:text-base font-bold mb-2" style={{ color: "var(--lo-navy-900)" }}>{item.title}</h3>
-                  <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "var(--lo-ink-2)" }}>{item.desc}</p>
-                  {i < 3 && <ChevronRight className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: "var(--lo-teal)", opacity: 0.4 }} />}
+                ))}
+              </div>
+              {/* HITL */}
+              <div className="mt-5 rounded-xl px-4 py-3 flex items-start gap-3" style={{ background: "rgba(22,40,79,0.04)", border: "1px solid var(--lo-line)" }}>
+                <Shield className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "var(--lo-navy-900)" }} />
+                <p className="text-xs" style={{ color: "var(--lo-ink-2)" }}>
+                  <span className="font-bold" style={{ color: "var(--lo-navy-900)" }}>Human-in-the-loop</span> — 모든 리포트는 트레이너 최종 검토를 거쳐 회원에게 전달됩니다. 자동 산출된 수치·프로토콜은 상담 보조 참고 자료이며, 최종 판단과 표현은 트레이너가 직접 확인합니다.
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Competitor Comparison Strip */}
+          <FadeIn className="mb-8 sm:mb-10">
+            <div className="lo-card p-5 sm:p-6">
+              <h3 className="text-sm sm:text-base font-bold mb-4" style={{ color: "var(--lo-navy-900)" }}>일반 체형분석 솔루션과의 차이</h3>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs font-bold px-2 py-1 rounded" style={{ background: "var(--lo-line)", color: "var(--lo-ink-2)" }}>일반 솔루션</span>
+                  {["촬영", "측정", "점수화", "리포트 출력"].map((s, i) => (
+                    <span key={i} className="flex items-center gap-1">
+                      <span className="text-xs px-2.5 py-1 rounded-full" style={{ background: "var(--lo-line)", color: "var(--lo-ink-2)" }}>{s}</span>
+                      {i < 3 && <ChevronRight className="w-3 h-3" style={{ color: "var(--lo-ink-3)" }} />}
+                    </span>
+                  ))}
+                  <span className="text-xs font-bold px-2 py-1 rounded" style={{ background: "#FEF2F2", color: "#DC2626" }}>종료</span>
                 </div>
-              </FadeIn>
-            ))}
-          </div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs font-bold px-2 py-1 rounded" style={{ background: "var(--lo-teal-tint)", color: "var(--lo-teal-700)" }}>LIGHT ONE</span>
+                  {["촬영", "측정", "점수화", "변화 추적", "프로토콜 매칭", "트레이너 검토", "회원 상담·재등록 설계"].map((s, i) => (
+                    <span key={i} className="flex items-center gap-1">
+                      <span className="text-xs px-2.5 py-1 rounded-full" style={{ background: i >= 4 ? "var(--lo-teal-tint)" : "var(--lo-line)", color: i >= 4 ? "var(--lo-teal-700)" : "var(--lo-ink-2)", fontWeight: i >= 4 ? 700 : 400 }}>{s}</span>
+                      {i < 6 && <ChevronRight className="w-3 h-3" style={{ color: "var(--lo-teal)", opacity: i >= 4 ? 1 : 0.4 }} />}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </FadeIn>
 
           {/* Risk Routing */}
           <FadeIn>
@@ -375,12 +460,104 @@ export default function Home() {
             </p>
           </FadeIn>
 
+          {/* TAM/SAM/SOM Funnel Chart */}
+          <FadeIn className="mb-10 sm:mb-14">
+            <div className="lo-card p-6 sm:p-8">
+              <div className="text-center mb-6">
+                <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "var(--lo-teal)" }}>Market Sizing</span>
+                <h3 className="text-lg sm:text-xl font-bold mt-1" style={{ color: "var(--lo-navy-900)" }}>TAM → SAM → SOM 시장 규모</h3>
+                <p className="text-xs mt-1" style={{ color: "var(--lo-ink-3)" }}>초기 집중 시장(SOM)에서 점진적 확장 전략</p>
+              </div>
+              {/* Funnel */}
+              <div className="flex flex-col items-center gap-0 w-full max-w-2xl mx-auto">
+                {[
+                  {
+                    label: "TAM", sub: "글로벌 피트니스 테크", value: "$47.6B",
+                    note: "Business Research Insights 2026 [확인필요]",
+                    color: "var(--lo-blue)", bg: "rgba(59,130,246,0.08)", border: "rgba(59,130,246,0.25)",
+                    widthPct: 100, barH: 72,
+                  },
+                  {
+                    label: "SAM", sub: "국내 PT·웰니스 디지털화", value: "₩2,800억+",
+                    note: "시설 14,773 × 평균 추정 [확인필요]",
+                    color: "var(--lo-teal)", bg: "rgba(14,148,136,0.08)", border: "rgba(14,148,136,0.25)",
+                    widthPct: 62, barH: 64,
+                  },
+                  {
+                    label: "SOM", sub: "초기 타겟: 피트니스 센터 2,000곳", value: "₩58억/년",
+                    note: "Pro 플랜 ₩89,000 × 12 × 2,000 [가설]",
+                    color: "var(--lo-gold)", bg: "rgba(245,158,11,0.08)", border: "rgba(245,158,11,0.3)",
+                    widthPct: 32, barH: 56,
+                  },
+                ].map((tier, i) => (
+                  <div key={i} className="flex flex-col items-center w-full">
+                    {/* Trapezoid bar */}
+                    <div
+                      className="relative flex items-center justify-between px-4 sm:px-8 rounded-lg transition-all duration-300 hover:shadow-md cursor-default group"
+                      style={{
+                        width: `${tier.widthPct}%`,
+                        minWidth: "220px",
+                        height: `${tier.barH}px`,
+                        background: tier.bg,
+                        border: `1.5px solid ${tier.border}`,
+                        clipPath: i < 2
+                          ? `polygon(0 0, 100% 0, calc(100% - 16px) 100%, 16px 100%)`
+                          : undefined,
+                      }}
+                    >
+                      {/* Label left */}
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <span
+                          className="text-xs sm:text-sm font-black tracking-wider font-num"
+                          style={{ color: tier.color }}
+                        >{tier.label}</span>
+                        <span className="hidden sm:block text-xs font-medium" style={{ color: "var(--lo-ink-2)" }}>{tier.sub}</span>
+                      </div>
+                      {/* Value right */}
+                      <div className="text-right">
+                        <div className="text-base sm:text-xl font-black font-num" style={{ color: tier.color }}>{tier.value}</div>
+                        <div className="text-[9px] sm:text-[10px] max-w-[140px] sm:max-w-none text-right" style={{ color: "var(--lo-ink-3)" }}>{tier.note}</div>
+                      </div>
+                      {/* Hover tooltip - mobile sub label */}
+                      <div className="sm:hidden absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                        <span className="text-[10px] font-semibold px-2 py-1 rounded" style={{ background: "rgba(255,255,255,0.9)", color: "var(--lo-ink-1)" }}>{tier.sub}</span>
+                      </div>
+                    </div>
+                    {/* Arrow connector */}
+                    {i < 2 && (
+                      <div className="flex flex-col items-center py-1">
+                        <div className="w-px h-3" style={{ background: "var(--lo-line)" }} />
+                        <svg width="12" height="7" viewBox="0 0 12 7" fill="none">
+                          <path d="M6 7L0 0h12L6 7z" fill="var(--lo-line)" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              {/* Bottom legend */}
+              <div className="mt-6 pt-5 flex flex-wrap justify-center gap-4 sm:gap-8" style={{ borderTop: "1px solid var(--lo-line)" }}>
+                {[
+                  { label: "TAM", desc: "전체 접근 가능 시장", color: "var(--lo-blue)" },
+                  { label: "SAM", desc: "서비스 가능 시장", color: "var(--lo-teal)" },
+                  { label: "SOM", desc: "획득 가능 시장 (MVP 목표)", color: "var(--lo-gold)" },
+                ].map((l) => (
+                  <div key={l.label} className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-sm flex-shrink-0" style={{ background: l.color }} />
+                    <span className="text-xs font-bold font-num" style={{ color: l.color }}>{l.label}</span>
+                    <span className="text-xs" style={{ color: "var(--lo-ink-2)" }}>{l.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeIn>
+
           {/* Market Size Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
             {[
               { label: "TAM", sub: "글로벌 피트니스 테크", value: "$47.6B", note: "Business Research Insights 2026 [확인필요]", color: "var(--lo-blue)" },
               { label: "SAM", sub: "국내 PT·웰니스 디지털화", value: "₩2,800억+", note: "시설 14,773 × 평균 추정 [확인필요]", color: "var(--lo-teal)" },
-              { label: "SOM", sub: "초기 타겟: PT샵 2,000곳", value: "₩58억/년", note: "Pro 플랜 ₩89,000 × 12 × 2,000 [가설]", color: "var(--lo-gold)" },
+              { label: "SOM", sub: "초기 타겟: 피트니스 센터 2,000곳", value: "₩58억/년", note: "Pro 플랜 ₩89,000 × 12 × 2,000 [가설]", color: "var(--lo-gold)" },
             ].map((m, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 <div className="lo-card p-6 sm:p-8 text-center hover:shadow-lo-2 transition-all duration-300">
@@ -501,7 +678,7 @@ export default function Home() {
                     <tr style={{ background: "color-mix(in srgb, var(--lo-teal) 5%, transparent)" }}>
                       <td className="px-4 py-3 font-bold" style={{ color: "var(--lo-teal-700)" }}>LIGHT ONE ★</td>
                       <td className="px-4 py-3 font-medium text-xs sm:text-sm" style={{ color: "var(--lo-ink-1)" }}>비의료 PT 상담 리포트 + 기능 회복 프로토콜</td>
-                      <td className="px-4 py-3 font-medium" style={{ color: "var(--lo-ink-1)", whiteSpace: "nowrap" }}>PT샵·헬스장·기업 B2B</td>
+                      <td className="px-4 py-3 font-medium" style={{ color: "var(--lo-ink-1)", whiteSpace: "nowrap" }}>헬스장·PT샵·필라테스·기업 B2B</td>
                       <td className="px-4 py-3"><span className="lo-tag-ok">Body Logic IP</span></td>
                       <td className="px-4 py-3"><span className="lo-tag-ok">있음 (4방향)</span></td>
                       <td className="px-4 py-3"><span className="lo-tag-ok">핵심 차별점 ★</span></td>
@@ -546,14 +723,15 @@ export default function Home() {
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ color: "var(--lo-navy-900)" }}>이 사업을 만든 이유</h2>
             <p className="mt-3 sm:mt-4 max-w-2xl mx-auto text-sm sm:text-base" style={{ color: "var(--lo-ink-2)" }}>
-              18년간 PT 현장에서 매일 반복된 문제를 더 이상 무시할 수 없었습니다.
+              20년 현장 경험이 이 사업의 유일한 출발점입니다. 심사위원이 묻는 '왜 당신이어야 하는가'에 대한 답입니다.
             </p>
           </FadeIn>
 
-          <div className="max-w-4xl mx-auto mb-10 sm:mb-12">
+          <div className="max-w-3xl mx-auto">
             <FadeIn>
               <div className="lo-card p-6 sm:p-10">
-                <div className="space-y-5 sm:space-y-6 text-sm sm:text-base leading-relaxed" style={{ color: "var(--lo-ink-2)" }}>
+                {/* Story */}
+                <div className="space-y-4 text-sm sm:text-base leading-relaxed mb-8" style={{ color: "var(--lo-ink-2)" }}>
                   <p>
                     <span className="font-semibold" style={{ color: "var(--lo-teal-700)" }}>"회원님, 지난달보다 어깨가 많이 좋아졌어요."</span><br />
                     13년간 이 말을 수천 번 했습니다. 그런데 회원이 물었습니다.
@@ -564,36 +742,27 @@ export default function Home() {
                     그날 회원은 재등록을 하지 않았습니다.
                   </p>
                   <p>
-                    이후로도 같은 상황이 반복됐습니다. 트레이너의 전문성은 똑같은데,
-                    그걸 <span className="font-semibold" style={{ color: "var(--lo-ink-1)" }}>"증명할 도구"가 없었습니다.</span>
-                  </p>
-                  <p>
                     그래서 만들었습니다. 트레이너의 관찰을 숫자로 바꾸고,
                     회원의 변화를 리포트로 보여주는 도구를.
                     <span className="font-semibold" style={{ color: "var(--lo-teal-700)" }}> 그것이 LIGHT ONE입니다.</span>
                   </p>
                 </div>
+                {/* Compact credentials */}
+                <div className="grid grid-cols-3 gap-3 pt-6" style={{ borderTop: "1px solid var(--lo-line)" }}>
+                  {[
+                    { v: "20년+", l: "PT 현장 경력" },
+                    { v: "AI 전문가 과정", l: "바이오헬스케어 AI" },
+                    { v: "Python · ML", l: "기술 역량" },
+                  ].map((c, i) => (
+                    <div key={i} className="text-center">
+                      <div className="text-sm sm:text-base font-bold font-num" style={{ color: "var(--lo-teal)" }}>{c.v}</div>
+                      <div className="text-[11px] mt-0.5" style={{ color: "var(--lo-ink-3)" }}>{c.l}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </FadeIn>
           </div>
-
-          <FadeIn>
-            <div className="max-w-4xl mx-auto lo-card p-5 sm:p-8">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
-                {[
-                  { v: "18년+", l: "PT 현장 경력", s: "편집부장 → 트레이너 → 센터 오너" },
-                  { v: "AI 전문가 과정", l: "바이오헬스케어 AI", s: "건양대병원 B2B · 2025.03~" },
-                  { v: "Python/ML", l: "기술 역량", s: "Django · XGBoost · MediaPipe" },
-                ].map((c, i) => (
-                  <div key={i}>
-                    <div className="text-base sm:text-lg font-bold font-num" style={{ color: "var(--lo-teal)" }}>{c.v}</div>
-                    <div className="text-xs sm:text-sm mt-1" style={{ color: "var(--lo-ink-2)" }}>{c.l}</div>
-                    <div className="text-[11px] mt-0.5" style={{ color: "var(--lo-ink-3)" }}>{c.s}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </FadeIn>
         </div>
       </section>
 
@@ -611,7 +780,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
               { q: "Q3 2025", title: "MVP 완성", items: ["Django 서비스 구현", "QS 산출 엔진", "더미 데이터 검증"], status: "done" },
-              { q: "Q4 2025", title: "파일럿 운영", items: ["대전 PT샵 2~3곳", "트레이너 피드백 수집", "리포트 템플릿 고도화"], status: "current" },
+              { q: "Q4 2025", title: "파일럿 운영", items: ["대전 피트니스 센터 2~3곳", "트레이너 피드백 수집", "리포트 템플릿 고도화"], status: "current" },
               { q: "Q1 2026", title: "정식 런칭", items: ["SaaS 구독 모델 오픈", "결제 시스템 연동", "마케팅 캠페인 시작"], status: "upcoming" },
               { q: "Q2 2026", title: "스케일업", items: ["AI 모델 고도화", "프랜차이즈 B2B 영업", "시리즈A 투자 유치"], status: "upcoming" },
             ].map((phase, i) => (
@@ -759,12 +928,12 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
             {[
               {
-                tier: "Starter", name: "1인 PT샵 · 프리랜서", price: "29,000",
+                tier: "Starter", name: "1인 센터 · 프리랜서 트레이너", price: "29,000",
                 features: ["회원 최대 30명 관리", "QS·JATC·위험 라우팅 기본 산출", "비의료 상담 리포트 월 50건", "4방향 촬영 QC 기본 제공"],
                 highlight: false,
               },
               {
-                tier: "★ Pro", name: "중소형 PT샵 (3–5인)", price: "89,000",
+                tier: "★ Pro", name: "중소형 피트니스 센터 (3–5인)", price: "89,000",
                 features: ["무제한 회원 관리", "트레이너별 권한 분리", "커스텀 로고 리포트 무제한", "기능 회복 프로토콜 매칭 완전 지원", "변화 추적 대시보드"],
                 highlight: true,
               },
@@ -836,14 +1005,14 @@ export default function Home() {
                 <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: "var(--lo-teal)", color: "#fff" }}>모두의 창업 2기</span>
               </div>
               <p className="text-xs sm:text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.75)" }}>
-                심사 관점 최우선 전략:{" "}
-                <span style={{ color: "#fff", fontWeight: 600 }}>트레이너 교육·인증 IP + 기업 B2B 파일럿</span>{" "}
-                조합이 "확장 가능한 수익모델 + 사회적 의미 + 명확한 1차 고객" 세 조건을 동시에 충족.
+                모두의창업 2기 심사 4대 축 대응:{" "}
+                <span style={{ color: "#fff", fontWeight: 600 }}>진정성(20년 현장) · 사회적 가치(비의료 컨디셔닝) · 구체성(캘리브레이션 MVP) · 성장성(SaaS+인증+B2B)</span>{" "}
+                를 하나의 패키지로 제시합니다.
                 멘토 피드백("촬영환경 편차 보정")을{" "}
-                <span style={{ color: "#5EEAD4", fontWeight: 600 }}>캘리브레이션 모듈 구현 증거</span>로 전환하는 것이 2기 평가의 핵심.
+                <span style={{ color: "#5EEAD4", fontWeight: 600 }}>캘리브레이션·조명정규화 모듈 구현 증거</span>로 전환. 재도전 우대 요건 충족.
               </p>
               <div className="flex flex-wrap gap-2">
-                {["방법론 IP", "B2B 파일럿 LOI", "실행력 아카이빙", "Human-in-the-loop"].map((chip) => (
+                {["방법론 IP", "B2B 파일럿 LOI", "실행력 아카이빙", "Human-in-the-loop", "멘토 피드백 반영", "비의료 안전 언어"].map((chip) => (
                   <span key={chip} className="px-3 py-1 rounded-full text-xs font-semibold"
                     style={{ background: "rgba(14,148,136,0.15)", border: "1px solid rgba(14,148,136,0.25)", color: "#5EEAD4" }}>
                     {chip}
@@ -860,11 +1029,11 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <FadeIn>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4" style={{ color: "#fff" }}>
-              PT의 가치를 데이터로 증명합니다
+              측정 이후의 답을 가진 컨디셔닝 OS
             </h2>
             <p className="text-sm sm:text-base mb-8 sm:mb-10" style={{ color: "rgba(255,255,255,0.6)", maxWidth: "480px", margin: "0 auto 2rem" }}>
               LIGHT ONE은 트레이너의 전문성을 대체하지 않습니다.<br />
-              트레이너의 판단에 근거를 더합니다.
+              20년 현장 경험을 표준화해 누구나 더 안전하고 자신감 있게 움직일 수 있는 컨디셔닝 OS를 만듭니다.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mt-8">
               <a href="/report-demo"
@@ -890,7 +1059,7 @@ export default function Home() {
             <div className="flex items-center gap-2 sm:gap-3">
               <img src="/manus-storage/lightone_logo_e8f3a2b1.png" alt="LIGHT ONE" className="h-6 w-6 sm:h-7 sm:w-7" />
               <span className="font-bold text-sm sm:text-base" style={{ color: "#fff" }}>LIGHT ONE</span>
-              <span className="text-[11px] sm:text-sm ml-1 sm:ml-2" style={{ color: "rgba(255,255,255,0.3)" }}>Data-Driven, Evidence-Based Personal Training</span>
+              <span className="text-[11px] sm:text-sm ml-1 sm:ml-2" style={{ color: "rgba(255,255,255,0.3)" }}>기능적 컨디셔닝 OS · 비의료 웰니스 SaaS</span>
             </div>
             <p className="text-xs sm:text-sm" style={{ color: "rgba(255,255,255,0.3)" }}>© 2025 LIGHT ONE. 송광일. All rights reserved.</p>
           </div>

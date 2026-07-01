@@ -32,36 +32,78 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --font-sans: "Pretendard Variable", "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-num: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
+/* =========================================================
+   LIGHT ONE Design Tokens (인포그래픽 Rev.6 기준)
+========================================================= */
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.12 0.02 250);
-  --foreground: oklch(0.95 0.005 250);
-  --card: oklch(0.15 0.02 250);
-  --card-foreground: oklch(0.95 0.005 250);
-  --popover: oklch(0.15 0.02 250);
-  --popover-foreground: oklch(0.95 0.005 250);
-  --primary: oklch(0.82 0.15 195);
-  --primary-foreground: oklch(0.12 0.02 250);
-  --secondary: oklch(0.2 0.02 250);
-  --secondary-foreground: oklch(0.85 0.005 250);
-  --muted: oklch(0.18 0.015 250);
-  --muted-foreground: oklch(0.6 0.015 250);
-  --accent: oklch(0.2 0.02 250);
-  --accent-foreground: oklch(0.95 0.005 250);
-  --destructive: oklch(0.6 0.2 25);
-  --destructive-foreground: oklch(0.95 0 0);
-  --border: oklch(0.25 0.02 250);
-  --input: oklch(0.25 0.02 250);
-  --ring: oklch(0.82 0.15 195);
-  --chart-1: oklch(0.82 0.15 195);
-  --chart-2: oklch(0.7 0.18 160);
-  --chart-3: oklch(0.75 0.15 80);
-  --chart-4: oklch(0.6 0.2 25);
-  --chart-5: oklch(0.65 0.15 280);
+  --radius: 0.75rem;
+
+  /* Paper / Background */
+  --lo-bg:          #F2F4F9;
+  --lo-paper:       #FFFFFF;
+  --lo-paper-tint:  #F7F9FC;
+  --lo-line:        #E3E7F0;
+  --lo-line-strong: #CDD4E3;
+
+  /* Ink */
+  --lo-ink-1:       #11182E;
+  --lo-ink-2:       #4D5670;
+  --lo-ink-3:       #8891A6;
+  --lo-ink-inv:     #EEF2FC;
+
+  /* Navy */
+  --lo-navy-950:    #0C1530;
+  --lo-navy-900:    #16284F;
+  --lo-navy-700:    #27406F;
+
+  /* Blue */
+  --lo-blue:        #2563EB;
+  --lo-blue-tint:   #E2EBFD;
+
+  /* Teal (brand accent) */
+  --lo-teal:        #0E9488;
+  --lo-teal-700:    #0B6E66;
+  --lo-teal-tint:   #DDF4F0;
+
+  /* Gold */
+  --lo-gold:        #C8932A;
+  --lo-gold-tint:   #FBF0DC;
+
+  /* Shadows */
+  --lo-sh-1: 0 1px 2px rgba(13,20,41,.04), 0 8px 20px rgba(13,20,41,.05);
+  --lo-sh-2: 0 2px 4px rgba(13,20,41,.05), 0 18px 40px rgba(13,20,41,.08);
+  --lo-sh-teal: 0 4px 12px rgba(14,148,136,.14), 0 22px 44px rgba(14,148,136,.18);
+
+  /* shadcn semantic tokens — light mode */
+  --background: oklch(0.97 0.005 250);
+  --foreground: oklch(0.12 0.02 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.12 0.02 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.12 0.02 250);
+  --primary: oklch(0.52 0.18 195);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.005 250);
+  --secondary-foreground: oklch(0.25 0.02 250);
+  --muted: oklch(0.95 0.005 250);
+  --muted-foreground: oklch(0.5 0.015 250);
+  --accent: oklch(0.95 0.005 250);
+  --accent-foreground: oklch(0.25 0.02 250);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.88 0.01 250);
+  --input: oklch(0.88 0.01 250);
+  --ring: oklch(0.52 0.18 195);
+  --chart-1: oklch(0.52 0.18 195);
+  --chart-2: oklch(0.55 0.18 165);
+  --chart-3: oklch(0.7 0.15 80);
+  --chart-4: oklch(0.55 0.22 25);
+  --chart-5: oklch(0.6 0.15 280);
 }
 
 @layer base {
@@ -72,7 +114,7 @@
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background-color: #0a0e1a;
+    background-color: var(--lo-bg);
   }
   html {
     scroll-behavior: smooth;
@@ -81,6 +123,8 @@
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
     overflow-x: hidden;
+    color: var(--lo-ink-1);
+    -webkit-font-smoothing: antialiased;
   }
   #root {
     display: flex;
@@ -91,6 +135,10 @@
   #root > * {
     width: 100%;
     max-width: 100%;
+  }
+  ::selection {
+    background: var(--lo-teal-tint);
+    color: var(--lo-teal-700);
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -133,45 +181,130 @@
       max-width: 1280px;
     }
   }
+
+  /* LIGHT ONE Paper Card */
+  .lo-card {
+    background: var(--lo-paper);
+    border: 1px solid var(--lo-line);
+    border-radius: 16px;
+    box-shadow: var(--lo-sh-1);
+  }
+
+  .lo-card-tint {
+    background: var(--lo-paper-tint);
+    border: 1px solid var(--lo-line);
+    border-radius: 16px;
+  }
+
+  /* Section intro header */
+  .lo-section-num {
+    font-family: var(--font-num);
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    background: var(--lo-navy-900);
+    border-radius: 6px;
+    padding: 4px 9px;
+  }
+
+  /* Tag pills */
+  .lo-tag-ok {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--lo-teal-700);
+    background: var(--lo-teal-tint);
+    border: 1px solid #BCE6DF;
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+
+  .lo-tag-stop {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--lo-ink-3);
+    background: var(--lo-paper-tint);
+    border: 1px solid var(--lo-line);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
 }
 
-/* Custom utilities for LIGHT ONE */
+/* =========================================================
+   LIGHT ONE Utilities
+========================================================= */
 @layer utilities {
-  .text-cyan {
-    color: #00E5FF;
-  }
-  .bg-navy-deep {
-    background-color: #0a1628;
-  }
-  .bg-navy-surface {
-    background-color: #0f2035;
-  }
-  .border-cyan-subtle {
-    border-color: rgba(0, 229, 255, 0.15);
-  }
-  .glow-cyan {
-    box-shadow: 0 0 20px rgba(0, 229, 255, 0.1), 0 0 40px rgba(0, 229, 255, 0.05);
+  .font-num {
+    font-family: var(--font-num);
   }
   .font-mono {
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono);
+  }
+  .text-lo-teal {
+    color: var(--lo-teal);
+  }
+  .text-lo-teal-700 {
+    color: var(--lo-teal-700);
+  }
+  .text-lo-blue {
+    color: var(--lo-blue);
+  }
+  .text-lo-navy {
+    color: var(--lo-navy-900);
+  }
+  .text-lo-ink-2 {
+    color: var(--lo-ink-2);
+  }
+  .text-lo-ink-3 {
+    color: var(--lo-ink-3);
+  }
+  .bg-lo-bg {
+    background-color: var(--lo-bg);
+  }
+  .bg-lo-paper {
+    background-color: var(--lo-paper);
+  }
+  .bg-lo-teal-tint {
+    background-color: var(--lo-teal-tint);
+  }
+  .bg-lo-navy {
+    background-color: var(--lo-navy-900);
+  }
+  .border-lo-line {
+    border-color: var(--lo-line);
+  }
+  .shadow-lo-1 {
+    box-shadow: var(--lo-sh-1);
+  }
+  .shadow-lo-2 {
+    box-shadow: var(--lo-sh-2);
+  }
+  .shadow-lo-teal {
+    box-shadow: var(--lo-sh-teal);
   }
 }
 
-/* Animations */
+/* =========================================================
+   Animations
+========================================================= */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
 
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scan-move {
+  0%   { transform: translateY(0);    opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { transform: translateY(330px); opacity: 0; }
 }
 
 .animate-pulse-dot {
@@ -180,4 +313,12 @@
 
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-scan {
+  animation: scan-move 3.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scan { animation: none; opacity: 0.55; }
 }

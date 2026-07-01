@@ -823,24 +823,25 @@ export default function ReportDemo() {
         fontFamily: "'Noto Sans KR', sans-serif",
       }}
     >
-      {/* 구글 폰트 */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-8 py-8">
-        {/* 상단 네비 */}
-        <div className="flex items-center justify-between mb-6">
+      {/* 상단 네비 */}
+      <div className="sticky top-0 z-50 border-b" style={{ background: "rgba(255,255,255,0.96)", backdropFilter: "blur(20px)", borderColor: "var(--lo-line)", boxShadow: "0 2px 16px rgba(13,20,41,.06)" }}>
+        <div className="max-w-[1480px] mx-auto px-4 sm:px-8 h-14 sm:h-16 flex items-center justify-between">
           <Link href="/">
-            <a className="flex items-center gap-2 text-sm font-bold transition-colors hover:opacity-70" style={{ color: "#4D5670" }}>
+            <a className="flex items-center gap-2 text-sm font-bold transition-colors hover:opacity-70" style={{ color: "var(--lo-ink-2)" }}>
               <span className="w-4 h-4">{Ico.back}</span>
               사업계획서로 돌아가기
             </a>
           </Link>
-          <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold tracking-widest rounded-full px-3 py-1" style={{ color: "#2563EB", background: "#E2EBFD", border: "1px solid #C9D9FB" }}>
-            <span className="w-3 h-3">{Ico.check}</span>
-            SAMPLE DATA · 견본 화면
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold tracking-widest rounded-full px-3 py-1" style={{ color: "#2563EB", background: "#E2EBFD", border: "1px solid #C9D9FB" }}>
+              <span className="w-3 h-3">{Ico.check}</span>
+              SAMPLE DATA · 견본 화면
+            </span>
+          </div>
         </div>
+      </div>
+
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-8 py-8">
 
         {/* 탭 전환 */}
         <div className="flex gap-1 bg-white border rounded-2xl p-1.5 mb-8 max-w-sm mx-auto shadow-sm" style={{ borderColor: "#E3E7F0" }}>

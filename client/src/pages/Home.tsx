@@ -303,11 +303,28 @@ export default function Home() {
                 <p className="text-xs sm:text-sm text-white/60">NRS ≥ 7 또는 RPE 10<br/>안전상 중단. 전문가 상담 권고 (의료 판단 아님).</p>
               </div>
             </div>
-            <div className="mt-6 sm:mt-8 text-center">
-              <a href="/report-demo" className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 font-medium rounded-lg transition-all duration-200 text-xs sm:text-sm">
-                <FileText className="w-4 h-4" />
-                실제 리포트 견본 보기
-                <ChevronRight className="w-4 h-4" />
+            {/* 리포트 데모 미리보기 */}
+            <div className="mt-8 sm:mt-12">
+              <a href="/report-demo" className="group block">
+                <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 hover:border-cyan-500/40 transition-all duration-300 shadow-lg hover:shadow-cyan-500/10">
+                  <img
+                    src="/manus-storage/webdev-preview-1782865797_6e92764d.png"
+                    alt="LIGHT ONE 리포트 데모 미리보기"
+                    className="w-full h-auto object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a]/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+                  <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between">
+                    <div>
+                      <p className="text-xs sm:text-sm text-white/70 font-medium">PT 상담 리포트 견본</p>
+                      <p className="text-[10px] sm:text-xs text-white/40 mt-0.5">가상 데이터 기반 · 트레이너용 / 회원용</p>
+                    </div>
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-cyan-500/20 backdrop-blur-sm border border-cyan-500/30 rounded-lg text-cyan-400 text-xs sm:text-sm font-medium group-hover:bg-cyan-500/30 transition-all duration-200">
+                      <FileText className="w-3.5 h-3.5" />
+                      데모 보기
+                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
+                    </div>
+                  </div>
+                </div>
               </a>
             </div>
           </motion.div>

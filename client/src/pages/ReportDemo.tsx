@@ -48,6 +48,150 @@ function QsRing({ score, size = 48, inner = 38 }: { score: number; size?: number
   );
 }
 
+// ─── QS 4주 추세 막대 차트 ─────────────────────
+const qsWeeklyData = [
+  { week: "1주차", date: "05-02", qs: 71, routing: "AUTO" },
+  { week: "2주차", date: "05-09", qs: 78, routing: "AUTO" },
+  { week: "3주차", date: "05-16", qs: 65, routing: "REVIEW" },
+  { week: "4주차", date: "05-23", qs: 86, routing: "AUTO" },
+];
+
+function QsTrendChart() {
+  const maxQs = 100;
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  return (
+    <div className="rounded-xl p-4" style={{ background: "#F7F9FC", border: "1px solid #E3E7F0" }}>
+      {/* 헤더 */}
+      <div className="flex items-center justify-between mb-3">
+        <div className="text-sm font-extrabold" style={{ color: "#16284F" }}>QS 4주 변화 추이</div>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[10px] font-extrabold" style={{ color: "#0B6E66" }}>▲ +15pt</span>
+          <span className="text-[9px] font-semibold" style={{ color: "#8891A6" }}>4주 대비</span>
+        </div>
+      </div>
+
+      {/* 차트 영역 */}
+      <div className="relative mb-3">
+        {/* Y축 가이드라인 */}
+        <div className="absolute inset-0 flex flex-col justify-between pointer-events-none" style={{ paddingBottom: 28 }}>
+          {[100, 75, 50, 25].map((v) => (
+            <div key={v} className="flex items-center gap-1">
+              <span style={{ fontSize: 8, color: "#CDD4E3", fontFamily: "Inter", fontWeight: 600, width: 18, textAlign: "right" }}>{v}</span>
+              <div className="flex-1" style={{ borderTop: "1px dashed #E3E7F0" }} />
+            </div>
+          ))}
+        </div>
+
+        {/* 막대 그룹 */}
+        <div className="flex items-end gap-2 pl-6" style={{ height: 120 }}>
+          {qsWeeklyData.map((d, i) => {
+            const barH = Math.round((d.qs / maxQs) * 88);
+            const isReview = d.routing === "REVIEW";
+            const isHovered = hovered === i;
+            const isCurrent = i === qsWeeklyData.length - 1;
+            return (
+              <div
+                key={i}
+                className="flex-1 flex flex-col items-center justify-end gap-1 cursor-default"
+                style={{ height: "100%" }}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+              >
+                {/* 툴팁 */}
+                {isHovered && (
+                  <div
+                    className="absolute z-10 rounded-lg px-2 py-1.5 text-center shadow-lg"
+                    style={{
+                      background: "#16284F",
+                      color: "#fff",
+                      fontSize: 10,
+                      fontWeight: 700,
+                      bottom: 34,
+                      transform: "translateX(-50%)",
+                      left: "50%",
+                      whiteSpace: "nowrap",
+                      pointerEvents: "none",
+                    }}
+                  >
+                    QS {d.qs}
+                    <div style={{ fontSize: 8, color: isReview ? "#FCD34D" : "#7FE0D2", fontWeight: 600 }}>
+                      {isReview ? "⚠ REVIEW" : "✓ AUTO"}
+                    </div>
+                  </div>
+                )}
+
+                {/* QS 수치 */}
+                <span
+                  style={{
+                    fontSize: 10,
+                    fontFamily: "Inter",
+                    fontWeight: 800,
+                    color: isReview ? "#B45309" : isCurrent ? "#2563EB" : "#4D5670",
+                    lineHeight: 1,
+                    marginBottom: 2,
+                  }}
+                >
+                  {d.qs}
+                </span>
+
+                {/* 막대 */}
+                <div
+                  style={{
+                    width: "100%",
+                    height: barH,
+                    borderRadius: "5px 5px 0 0",
+                    background: isReview
+                      ? "linear-gradient(180deg, #F59E0B 0%, #FCD34D 100%)"
+                      : isCurrent
+                      ? "linear-gradient(180deg, #1D4ED8 0%, #2563EB 60%, #60A5FA 100%)"
+                      : "linear-gradient(180deg, #3B82F6 0%, #93C5FD 100%)",
+                    opacity: isHovered ? 1 : 0.85,
+                    transition: "all 0.18s cubic-bezier(0.23,1,0.32,1)",
+                    transform: isHovered ? "scaleY(1.04)" : "scaleY(1)",
+                    transformOrigin: "bottom",
+                    boxShadow: isHovered
+                      ? isReview
+                        ? "0 -3px 10px rgba(245,158,11,0.4)"
+                        : "0 -3px 10px rgba(37,99,235,0.4)"
+                      : "none",
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* X축 레이블 */}
+      <div className="flex gap-2 pl-6">
+        {qsWeeklyData.map((d, i) => (
+          <div key={i} className="flex-1 text-center">
+            <div style={{ fontSize: 9, fontWeight: 800, color: i === qsWeeklyData.length - 1 ? "#2563EB" : "#4D5670" }}>{d.week}</div>
+            <div style={{ fontSize: 8, color: "#8891A6", fontWeight: 600 }}>{d.date}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* 범례 */}
+      <div className="flex items-center gap-4 mt-3 pt-2" style={{ borderTop: "1px dashed #CDD4E3" }}>
+        <div className="flex items-center gap-1">
+          <div className="w-2.5 h-2.5 rounded-sm" style={{ background: "#2563EB" }} />
+          <span style={{ fontSize: 9, color: "#8891A6", fontWeight: 600 }}>AUTO</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-2.5 h-2.5 rounded-sm" style={{ background: "#F59E0B" }} />
+          <span style={{ fontSize: 9, color: "#8891A6", fontWeight: 600 }}>REVIEW</span>
+        </div>
+        <div className="flex items-center gap-1 ml-auto">
+          <div className="w-2.5 h-2.5 rounded-sm" style={{ background: "#1D4ED8" }} />
+          <span style={{ fontSize: 9, color: "#2563EB", fontWeight: 700 }}>현재 세션</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── 트레이너 리포트 ──────────────────────────
 function TrainerReport() {
   const [tab, setTab] = useState(0);
@@ -416,6 +560,9 @@ function MemberReport() {
               </div>
               <p className="text-[10px] font-medium pt-2" style={{ color: "#8891A6", borderTop: "1px dashed #CDD4E3" }}>※ 4개 영역을 정규화하여 통합 상태를 추적</p>
             </div>
+
+            {/* QS 4주 추세 차트 */}
+            <QsTrendChart />
 
             {/* 라우팅 */}
             <div className="rounded-xl p-4 flex gap-3 items-start" style={{ background: "#FCEFD8", border: "1px solid #F0D6A3" }}>

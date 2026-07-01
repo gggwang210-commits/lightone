@@ -38,6 +38,12 @@ function FadeIn({ children, delay = 0, className = "" }: { children: React.React
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [compFilters, setCompFilters] = useState<Record<string, boolean>>({
+    ip: false, mobile: false, protocol: false, qs: false,
+  });
+  const toggleFilter = (key: string) =>
+    setCompFilters((prev) => ({ ...prev, [key]: !prev[key] }));
+  const activeFilters = Object.entries(compFilters).filter(([, v]) => v).map(([k]) => k);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -393,15 +399,71 @@ export default function Home() {
           {/* Competition Table */}
           <FadeIn>
             <div className="lo-card overflow-hidden mb-6 sm:mb-8">
-              <div className="p-5 sm:p-6 flex items-center justify-between flex-wrap gap-3"
-                style={{ borderBottom: "1px solid var(--lo-line)" }}>
-                <div>
-                  <div className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: "var(--lo-blue)" }}>Competitive Landscape</div>
-                  <h3 className="text-base sm:text-lg font-bold" style={{ color: "var(--lo-navy-900)" }}>경쟁 지형 — 측정 솔루션은 이미 레드오션</h3>
+              <div className="p-5 sm:p-6" style={{ borderBottom: "1px solid var(--lo-line)" }}>
+                <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+                  <div>
+                    <div className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: "var(--lo-blue)" }}>Competitive Landscape</div>
+                    <h3 className="text-base sm:text-lg font-bold" style={{ color: "var(--lo-navy-900)" }}>경쟁 지형 — 측정 솔루션은 이미 레드오션</h3>
+                  </div>
+                  <span className="text-xs font-semibold px-3 py-1.5 rounded-lg" style={{ background: "var(--lo-paper-tint)", border: "1px solid var(--lo-line)", color: "var(--lo-ink-3)" }}>
+                    2026.07 리서치 기반
+                  </span>
                 </div>
-                <span className="text-xs font-semibold px-3 py-1.5 rounded-lg" style={{ background: "var(--lo-paper-tint)", border: "1px solid var(--lo-line)", color: "var(--lo-ink-3)" }}>
-                  2026.07 리서치 기반
-                </span>
+                {/* 기능 필터 체크박스 */}
+                <div className="flex flex-wrap gap-2 items-center">
+                  <span className="text-[11px] font-bold tracking-widest uppercase mr-1" style={{ color: "var(--lo-ink-3)" }}>기능 필터</span>
+                  {([
+                    { key: "ip", label: "방법론 IP" },
+                    { key: "mobile", label: "스마트폰 기반" },
+                    { key: "protocol", label: "회복 프로토콜" },
+                    { key: "qs", label: "QS 점수화" },
+                  ] as { key: string; label: string }[]).map(({ key, label }) => {
+                    const active = compFilters[key];
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => toggleFilter(key)}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border transition-all duration-200"
+                        style={{
+                          background: active ? "var(--lo-teal)" : "var(--lo-paper)",
+                          borderColor: active ? "var(--lo-teal)" : "var(--lo-line)",
+                          color: active ? "#fff" : "var(--lo-ink-2)",
+                          boxShadow: active ? "0 2px 8px rgba(14,148,136,.25)" : "none",
+                          transform: active ? "scale(1.04)" : "scale(1)",
+                        }}
+                      >
+                        <span
+                          className="w-3.5 h-3.5 rounded-sm border flex items-center justify-center transition-all duration-200"
+                          style={{
+                            background: active ? "rgba(255,255,255,0.25)" : "transparent",
+                            borderColor: active ? "rgba(255,255,255,0.5)" : "var(--lo-line)",
+                          }}
+                        >
+                          {active && (
+                            <svg viewBox="0 0 10 8" fill="none" className="w-2 h-2">
+                              <path d="M1 4l2.5 2.5L9 1" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          )}
+                        </span>
+                        {label}
+                      </button>
+                    );
+                  })}
+                  {activeFilters.length > 0 && (
+                    <button
+                      onClick={() => setCompFilters({ ip: false, mobile: false, protocol: false, qs: false })}
+                      className="text-[11px] font-semibold px-2.5 py-1 rounded-full transition-all duration-150"
+                      style={{ color: "var(--lo-ink-3)", background: "var(--lo-paper-tint)", border: "1px solid var(--lo-line)" }}
+                    >
+                      초기화 ×
+                    </button>
+                  )}
+                </div>
+                {activeFilters.length > 0 && (
+                  <p className="mt-2 text-[11px]" style={{ color: "var(--lo-teal-700)" }}>
+                    선택한 기능을 보유한 서비스만 표시됩니다. LIGHT ONE은 항상 포함됩니다.
+                  </p>
+                )}
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs sm:text-sm">
@@ -413,20 +475,26 @@ export default function Home() {
                     </tr>
                   </thead>
                   <tbody>
-                    {[
-                      { name: "바디코디", func: "CRM·예약·결제 운영관리", base: "4,000+ 센터", ip: false, mobile: false, protocol: false, lo: false },
-                      { name: "피트릭스", func: "키오스크 AI 체형분석 70+항목", base: "1,200+ B2B", ip: false, mobile: false, protocol: false, lo: false },
-                      { name: "바디닷", func: "3D 카메라 체형분석", base: "병원 400+", ip: false, mobile: false, protocol: false, lo: false },
-                      { name: "엑스바디", func: "국내 1위 체형분석 장비·리포트", base: "병원·기업·체육관", ip: false, mobile: false, protocol: false, lo: false },
-                      { name: "APECS", func: "스마트폰 자세평가 앱", base: "임상가·개인", ip: false, mobile: true, protocol: false, lo: false },
-                    ].map((row, i) => (
+                    {([
+                      { name: "바디코디", func: "CRM·예약·결제 운영관리", base: "4,000+ 센터", ip: false, mobile: false, protocol: false, qs: false },
+                      { name: "피트릭스", func: "키오스크 AI 체형분석 70+항목", base: "1,200+ B2B", ip: false, mobile: false, protocol: false, qs: false },
+                      { name: "바디닷", func: "3D 카메라 체형분석", base: "병원 400+", ip: false, mobile: false, protocol: false, qs: false },
+                      { name: "엑스바디", func: "국내 1위 체형분석 장비·리포트", base: "병원·기업·체육관", ip: false, mobile: false, protocol: false, qs: false },
+                      { name: "APECS", func: "스마트폰 자세평가 앱", base: "임상가·개인", ip: false, mobile: true, protocol: false, qs: false },
+                    ] as { name: string; func: string; base: string; ip: boolean; mobile: boolean; protocol: boolean; qs: boolean }[])
+                      .filter((row) =>
+                        activeFilters.length === 0 ||
+                        activeFilters.every((f) => row[f as keyof typeof row] === true)
+                      )
+                      .map((row, i) => (
                       <tr key={i} style={{ borderBottom: "1px solid var(--lo-line)" }}>
                         <td className="px-4 py-3 font-semibold" style={{ color: "var(--lo-ink-1)" }}>{row.name}</td>
                         <td className="px-4 py-3" style={{ color: "var(--lo-ink-2)" }}>{row.func}</td>
                         <td className="px-4 py-3" style={{ color: "var(--lo-ink-2)", whiteSpace: "nowrap" }}>{row.base}</td>
-                        <td className="px-4 py-3"><span className="lo-tag-stop">없음</span></td>
+                        <td className="px-4 py-3">{row.ip ? <span className="lo-tag-ok">있음</span> : <span className="lo-tag-stop">없음</span>}</td>
                         <td className="px-4 py-3">{row.mobile ? <span className="lo-tag-ok">있음</span> : <span className="lo-tag-stop">없음</span>}</td>
-                        <td className="px-4 py-3"><span className="lo-tag-stop">없음</span></td>
+                        <td className="px-4 py-3">{row.protocol ? <span className="lo-tag-ok">있음</span> : <span className="lo-tag-stop">없음</span>}</td>
+                        <td className="px-4 py-3">{row.qs ? <span className="lo-tag-ok">있음</span> : <span className="lo-tag-stop">없음</span>}</td>
                       </tr>
                     ))}
                     {/* LIGHT ONE row */}
@@ -437,6 +505,7 @@ export default function Home() {
                       <td className="px-4 py-3"><span className="lo-tag-ok">Body Logic IP</span></td>
                       <td className="px-4 py-3"><span className="lo-tag-ok">있음 (4방향)</span></td>
                       <td className="px-4 py-3"><span className="lo-tag-ok">핵심 차별점 ★</span></td>
+                      <td className="px-4 py-3"><span className="lo-tag-ok">QS 0–100 ★</span></td>
                     </tr>
                   </tbody>
                 </table>
